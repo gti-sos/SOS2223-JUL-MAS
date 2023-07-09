@@ -1,0 +1,659 @@
+{
+	"info": {
+		"_postman_id": "f373726e-5876-4de6-b539-6495f2506e49",
+		"name": "Gcloud V3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26063155"
+	},
+	"item": [
+		{
+			"name": "GCLOUD POST",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201 created\", function(){",
+							"    pm.response.to.have.status(201);",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "      { \n    \"id\": 34777,\n    \"registry_code\": \"CM/AL/00001\",\n    \"name\": \"LA GARROFA\",\n    \"inscription_date\": \"19590609\",\n    \"start_date\": \"1989\",\n    \"state\": \"ALMERÍA\",\n    \"city\": \"ALMERÍA\",\n    \"camping_places\": 210,\n    \"responsible\": \"COMPLEJO LA GARROFA, S.L.\",\n    \"group_id\": 10,\n    \"category\": 4,\n    \"modality\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/campings",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v3",
+						"campings"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GCLOUD POST",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "      { \"id\": 113439,\n        \"registry_code\": \"VFT/MA/029625\",\n        \"name\": \"___________________POOOOOOST___________\",\n        \"inscription_date\": 201703314,\n        \"start_date\": 201702322,\n        \"state\": \"ADRA\",\n        \"city\": \"ADRA\",\n        \"mail\": \"fleur2vdwoude@gmail.com\",\n        \"coord_x\": 30269741.9082,\n        \"srid\": 2528830,\n        \"num_doc_verified\": \"X75792273Z\",\n        \"responsible\": \"xxx: FLEU2R MADELEINE VAN DER WOUDE \"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/andalusian-campings",
+							"protocol": "https",
+							"host": [
+								"sos2223-20",
+								"ew",
+								"r",
+								"appspot",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"andalusian-campings"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7-rM9AyJuqT6iOan/xHh+AW+7K/T8\""
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "d617b51932c66565ff2eea6787b557ca;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Mar 2023 11:23:05 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""
+						}
+					],
+					"cookie": [],
+					"body": "Created"
+				}
+			]
+		},
+		{
+			"name": "GCLOUD PUT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 34777,\n    \"registry_code\": \"CM/AL/00001\",\n    \"name\": \"LA GARROFA\",\n    \"inscription_date\": \"19590609\",\n    \"start_date\": \"1989\",\n    \"state\": \"ALMERÍA\",\n    \"city\": \"ALMERÍA\",\n    \"camping_places\": 210,\n    \"responsible\": \"COMPLEJO LA GARROFA, S.L.\",\n    \"group_id\": 10,\n    \"category\": 4,\n    \"modality\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/campings/34777",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v3",
+						"campings",
+						"34777"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GCLOUD PUT",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 113439,\n    \"registry_code\": \"VTAR/GR/00652\",\n    \"name\": \"_______________PUT_MODIFIED________________\",\n    \"inscription_date\": 20100107,\n    \"start_date\": \"20100107\",\n    \"city\": \"BUBION\",\n    \"num_doc_verified\": \"24247606V\",\n    \"responsible\": \"xxx: ANGEL RODRIGUEZ PEREZ\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/andalusian-campings/113439",
+							"protocol": "https",
+							"host": [
+								"sos2223-20",
+								"ew",
+								"r",
+								"appspot",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"andalusian-campings",
+								"113439"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2a-TAxKhV9im8jelxowhk8IIyZoTf4\""
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "b4fb1fde04e66f57663d384017d16a4a"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Mar 2023 11:23:10 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "private"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Camping updated successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GCLOUD PUT NotAllowed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405 not allowed\", function(){",
+							"    pm.response.to.have.status(405);",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3439,\n    \"registry_code\": \"VTAR/GR/00652\",\n    \"name\": \"_______________PUT_MODIFIED________________\",\n    \"inscription_date\": 20100107,\n    \"start_date\": \"20100107\",\n    \"city\": \"BUBION\",\n    \"num_doc_verified\": \"24247606V\",\n    \"responsible\": \"xxx: ANGEL RODRIGUEZ PEREZ\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/campings",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v3",
+						"campings"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GCLOUD PUT NotAllowed",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 3439,\n    \"registry_code\": \"VTAR/GR/00652\",\n    \"name\": \"_______________PUT_MODIFIED________________\",\n    \"inscription_date\": 20100107,\n    \"start_date\": \"20100107\",\n    \"city\": \"BUBION\",\n    \"num_doc_verified\": \"24247606V\",\n    \"responsible\": \"xxx: ANGEL RODRIGUEZ PEREZ\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/andalusian-campings",
+							"protocol": "https",
+							"host": [
+								"sos2223-20",
+								"ew",
+								"r",
+								"appspot",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"andalusian-campings"
+							]
+						}
+					},
+					"status": "Method Not Allowed",
+					"code": 405,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"12-UGJMK66P4abaBlq0vKHJaCKuGCA\""
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "01ca9f82ef455720958ea5fe414758d1;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 Apr 2023 17:08:47 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "18"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						}
+					],
+					"cookie": [],
+					"body": "Method Not Allowed"
+				}
+			]
+		},
+		{
+			"name": "GCLOUD - DELETE ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/campings/34777",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v3",
+						"campings",
+						"34777"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GCLOUD - DELETE ID",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 3439,\n    \"registry_code\": \"VTAR/GR/00652\",\n    \"name\": \"____________aaaaa_____________\",\n    \"inscription_date\": 20100107,\n    \"start_date\": 20100107,\n    \"city\": \"BUBION\",\n    \"num_doc_verified\": \"24247606V\",\n    \"responsible\": \"xxx: ANGEL RODRIGUEZ PEREZ\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://sos2223-20.ew.r.appspot.com//api/v1/andalusian-campings/113439",
+							"protocol": "https",
+							"host": [
+								"sos2223-20",
+								"ew",
+								"r",
+								"appspot",
+								"com"
+							],
+							"path": [
+								"",
+								"api",
+								"v1",
+								"andalusian-campings",
+								"113439"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2a-oEryYGLAW7klPq229r4dI7OZbnE\""
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "4a22e4dbd2f0a461e7b8f3a0cca03e9e"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Mar 2023 11:23:14 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "private"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Camping deleted successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GCLOUD -DELETE All",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 19715,\n    \"registry_code\": \"VTAR/GR/00652\",\n    \"name\": \"____________aaaaa_____________\",\n    \"inscription_date\": 20100107,\n    \"start_date\": 20100107,\n    \"city\": \"BUBION\",\n    \"num_doc_verified\": \"24247606V\",\n    \"responsible\": \"xxx: ANGEL RODRIGUEZ PEREZ\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/campings",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v3",
+						"campings"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GCLOUD -DELETE All",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 19715,\n    \"registry_code\": \"VTAR/GR/00652\",\n    \"name\": \"____________aaaaa_____________\",\n    \"inscription_date\": 20100107,\n    \"start_date\": 20100107,\n    \"city\": \"BUBION\",\n    \"num_doc_verified\": \"24247606V\",\n    \"responsible\": \"xxx: ANGEL RODRIGUEZ PEREZ\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/andalusian-campings",
+							"protocol": "https",
+							"host": [
+								"sos2223-20",
+								"ew",
+								"r",
+								"appspot",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"andalusian-campings"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"21-kE58ML8kUfVvmuhOTG/ZO0yT3Hw\""
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "2df9836dc3e22e0ecee4221fa0c4179f"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Mar 2023 11:21:51 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "private"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Deleted 15 campings\"\n}"
+				}
+			]
+		}
+	]
+}
