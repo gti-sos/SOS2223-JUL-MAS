@@ -98,14 +98,11 @@ function loadBackend_MASv3(app) {
 
         // Comprobamos si tras el filtrado sigue habiendo datos, si no hay:
         if (datos.length == 0) {
-
           console.log(`campings not found`);
           // Estado 404: Not Found
           res.sendStatus(404);
-
           // Si por el contrario encontramos datos
         } else {
-
           console.log(`Data of campings returned: ${datos.length}`);
           // Devolvemos dichos datos, estado 200: OK
           res.json(datos);
@@ -117,34 +114,19 @@ function loadBackend_MASv3(app) {
 
   //GET /campings/state/id (First Province, then id): Recurso único
   app.get(`${BASE_API_URL}/campings/:state/:id`, (req, res) => {
-
     let id = req.params.id;
     let state = req.params.state;
-
     console.log(`New request to /campings/${state}/${id}`);
-
-    // Recuperamos el registro concreto que se nos pide
     campings.find({ 'id': parseInt(id), 'state': state }, { _id: 0 }, (err, data) => {
-
       // Si existen errores:
       if (err) {
-
         console.log(`Error getting campings/${state}/${id}: ${err}`);
-        // Estado 500: Internal Server Error
         res.sendStatus(500);
-
-        // Si no existen datos 
       } else if (data.length == 0) {
-
-        console.log(`campings/${state}/${id} not found`);
-        // Estado 404: Not Found
+        console.log(`campings/${state}/${id} no encontrados`);
         res.sendStatus(404);
-
-        // Si existen datos
       } else {
-
         console.log(`Data campings/${state}/${id} returned`);
-        // Estado 200: Ok
         res.json(data[0]);
       }
     });
@@ -152,57 +134,71 @@ function loadBackend_MASv3(app) {
 
   //GET /campings/state: Recursos por provincia
   app.get(`${BASE_API_URL}/campings/:state`, (req, res) => {
-
     let state = req.params.state;
-
     console.log(`New request to /campings/${state}`);
-
-    // Buscamos los registros que tengan el dado campo provincia
     campings.find({ 'state': state }, { _id: 0 }, (err, data) => {
       console.log(state);
       console.log(data);
-      // Si existen errores
       if (err) {
-
         console.log(`Error getting campings`);
         // Estado 500: Internal Server Error
         res.sendStatus(500);
-
         // Si no existen datos
       } else if (data.length == 0) {
-
         console.log(`campings/${state} not found`);
-        // Estado 404: Not Found
-        res.sendStatus(404);
-
+        res.json([]);
       } else {
         let i = -1;
         if (!req.query.offset) { var offset = -1; } else { var offset = parseInt(req.query.offset); }
-
         let datos = data.filter((x) => {
           i = i + 1;
           if (req.query.limit == undefined) { var cond = true; } else { var cond = (offset + parseInt(req.query.limit)) >= i; }
           return (i > offset) && cond;
         });
-
         if (datos.length == 0) {
-
-          console.log(`campings not found`);
-          // Estado 404: Not Found
-          res.sendStatus(404);
-
-          // Si hay datos:
+          console.log(`campings/${state} not found`);
+          res.json([]);
         } else {
-
           console.log(`Data of campings returned: ${datos.length}`);
-          // Devolvemos datos, estado 200: Ok
           res.json(datos);
-
         }
       }
     });
-
   });
+
+  // GET /campings/id: Recursos por ID
+app.get(`${BASE_API_URL}/campings/:id`, (req, res) => {
+  let id = parseInt(req.params.id);
+  console.log(`New request to /campings/${id}`);
+  campings.find({ 'id': id }, { _id: 0 }, (err, data) => {
+    console.log(id);
+    console.log(data);
+    if (err) {
+      console.log(`Error getting campings`);
+      // Estado 500: Internal Server Error
+      res.sendStatus(500);
+    } else if (data.length == 0) {
+      console.log(`campings/${id} not found`);
+      res.json([]);
+    } else {
+      let i = -1;
+      if (!req.query.offset) { var offset = -1; } else { var offset = parseInt(req.query.offset); }
+      let datos = data.filter((x) => {
+        i = i + 1;
+        if (req.query.limit == undefined) { var cond = true; } else { var cond = (offset + parseInt(req.query.limit)) >= i; }
+        return (i > offset) && cond;
+      });
+      if (datos.length == 0) {
+        console.log(`campings/${id} not found`);
+        res.json([]);
+      } else {
+        console.log(`Data of campings returned: ${datos.length}`);
+        res.json(datos);
+      }
+    }
+  });
+});
+
 
   //______________________________POST con URL prohibidas
   app.post(BASE_API_URL + '/campings/*', (req, res) => {

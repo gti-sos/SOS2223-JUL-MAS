@@ -48,26 +48,18 @@ function loadBackend_MASv2(app) {
   //______________________________GET con rango de busqueda
   app.get(BASE_API_URL + '/campings', (req, res) => {
     console.log(`New request to /campings`);
-
     // Recuperamos todos los registros de la base de datos para filtrarlos despues
     campings.find({}, { _id: 0 }, (err, data) => {
-
       // Comprobamos los errores que han podido surgir
       if (err) {
-
         console.log(`Error getting campings`);
-
         // El estado es 500: Internal Server Error
         res.sendStatus(500);
-
         // Comprobamos si existen datos:
       } else if (data.length == 0) {
-
         console.log(`campings not found`);
-
         // Si no existen datos el estado es 404: Not Found
         res.sendStatus(404);
-
       } else {
         // Inicializamos los valores necesarios para el filtrado: un contador para el limit y el valor por defecto offset
         let i = -1;
@@ -101,7 +93,7 @@ function loadBackend_MASv2(app) {
 
           console.log(`campings not found`);
           // Estado 404: Not Found
-          
+
           res.sendStatus(404);
 
           // Si por el contrario encontramos datos
@@ -296,7 +288,7 @@ function loadBackend_MASv2(app) {
     var url = req.url.replace('/?url=', '');
     console.log('piped: ' + req.url);
     req.pipe(request(url)).pipe(res);
-});
+  });
 
 };
 
