@@ -9,11 +9,6 @@
                 <strong>Equipo</strong>
                 <ul dir="auto">
                     <li>
-                        <a href="https://github.com/Lukmare"
-                            >Lorenzo Morales Palacios (Fuente: immovables)</a
-                        >
-                    </li>
-                    <li>
                         <a href="https://github.com/salinosaso"
                             >Miguel Ángel Salinas(Fuente: andalusian-campings)
                         </a>
@@ -26,7 +21,7 @@
             </li>
             <li>
                 <strong>Repositorio</strong>:
-                <a href="https://github.com/gti-sos/SOS2223-20"
+                <a href="https://github.com/gti-sos/SOS2223-JUL-MAS"
                     >gti-sos/SOS2223-20</a
                 >
             </li>
@@ -39,17 +34,6 @@
             <li>
                 <strong>APIs v1</strong>:
                 <ul dir="auto">
-                    <li>
-                        <a
-                            href="http://sos2223-20.appspot.com/api/v1/immovables/docs"
-                            rel="nofollow"
-                            >http://sos2223-20.appspot.com/api/v1/immovables/docs</a
-                        >
-                        (desarrollado por
-                        <a href="https://github.com/Lukmare"
-                            >Lorenzo Morales Palacios</a
-                        >)
-                    </li>
                     <li>
                         <a
                             href="http://sos2223-20.appspot.com/api/v1/andalusian-campings/docs"
@@ -67,17 +51,6 @@
                         <ul dir="auto">
                             <li>
                                 <a
-                                    href="http://sos2223-20.appspot.com/api/v2/immovables/docs"
-                                    rel="nofollow"
-                                    >http://sos2223-20.appspot.com/api/v2/immovables/docs</a
-                                >
-                                (desarrollado por
-                                <a href="https://github.com/Lukmare"
-                                    >Lorenzo Morales Palacios</a
-                                >)
-                            </li>
-                            <li>
-                                <a
                                     href="https://documenter.getpostman.com/view/26063155/2s93XyU3Xd"
                                     rel="nofollow"
                                     >http://sos2223-20.appspot.com/api/v2/andalusian-campings/docs</a
@@ -93,12 +66,6 @@
                                 <ul dir="auto">
                                     <li>
                                         <a
-                                            href="https://documenter.getpostman.com/view/26062489/2s93K1oysD"
-                                            >Doc Inmuebles
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
                                             href="https://documenter.getpostman.com/view/26063155/2s93K1oeqs"
                                             >Doc Campings Andalucia</a
                                         >
@@ -109,12 +76,7 @@
                             <li>
                                 <strong>Documentación de Postman v2</strong>
                                 <ul dir="auto">
-                                    <li>
-                                        <a
-                                            href="https://documenter.getpostman.com/view/26062489/2s93XsZn3G"
-                                            >Doc Inmuebles
-                                        </a>
-                                    </li>
+                                    
                                     <li>
                                         <a
                                             href="https://documenter.getpostman.com/view/26063155/2s93XyU3Xd"
@@ -126,12 +88,7 @@
                             <li>
                                 <strong>Documentación de Postman v3</strong>
                                 <ul dir="auto">
-                                    <li>
-                                        <a
-                                            href="https://documenter.getpostman.com/view/26062489/2s93kz4PpH"
-                                            >Doc Inmuebles
-                                        </a>
-                                    </li>
+                                    
                                     <li>
                                         <a
                                             href="https://documenter.getpostman.com/view/26063155/2s93m611ua"
@@ -144,11 +101,7 @@
                             <li>
                                 <strong>Vídeos</strong>
                                 <ul dir="auto">
-                                    <li>
-                                        <a href="https://youtu.be/OnF0z0iAIiY"
-                                            >Lorenzo Morales Palacios (Vídeo)</a
-                                        >
-                                    </li>
+                                   
                                     <li>
                                         <a href="https://drive.google.com/file/d/1UTmV8MxufwQhJgW2r371UJ5AgFhHeI7O/view?usp=share_link"
                                             >Miguel Ángel Salinas(Vídeo)
@@ -159,7 +112,6 @@
 
                             <li>
                                 <strong>Frontend</strong>
-                                <a href="/api/v2/immovables">Inmuebles</a>
                                 <br />
                                 <a href="/api/v2/andalusian-campings"
                                     >Campings Andalucia</a

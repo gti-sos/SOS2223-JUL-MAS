@@ -1,6 +1,5 @@
 <nav>
   <a href="/">Inicio</a>
-  <a href="/api/v2/immovables">Inmuebles</a>
   <a href="/api/v2/andalusian-campings">Campings Andalucia</a>
   <a href="/integrations">Integraciones</a>
   <a href="/analytics">Integración Conjunta</a>
