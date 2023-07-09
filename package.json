@@ -89,14 +89,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gti-sos/sos2223-20.git"
+    "url": "git+https://github.com/gti-sos/sos2223-JUL-MAS.git"
   },
   "author": "Lukmare & Salinosaso",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gti-sos/sos2223-20/issues"
+    "url": "https://github.com/gti-sos/sos2223-JUL-MAS/issues"
   },
-  "homepage": "https://github.com/gti-sos/sos2223-20#readme",
+  "homepage": "https://github.com/gti-sos/sos2223-JUL-MAS#readme",
   "devDependencies": {
     "@playwright/test": "^1.34.2"
   },
