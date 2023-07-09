@@ -1,20 +1,4 @@
 <main class="container">
-  <h1 class="title">Integraciones LMP</h1>
-  <nav>
-    <ul>
-      <li><a href="\integrations\lmp\api-immovables\jscharting">Graficos API Immovables JSCharting</a></li>
-      <li><a href="\integrations\lmp\api-immovables\morris">Graficos API Immovables Morris</a></li>
-      <li><a href="\integrations\lmp\api-sos\con-proxy">Integraciones con Compañeros LMP con Proxy</a></li>
-      <li><a href="\integrations\lmp\api-sos\sin-proxy">Integraciones con Compañeros LMP sin Proxy</a></li>
-      <li><a href="\integrations\lmp\apis-externas\google\grafica">API Externa Google LMP Grafica</a></li>
-      <li><a href="\integrations\lmp\apis-externas\google\tabla">API Externa Google LMP Tabla</a></li>
-      <li><a href="\integrations\lmp\apis-externas\youtube">API Externa Youtube LMP</a></li>
-      <li><a href="\integrations\lmp\api-immovables\highcharts">Graficos API Immovables HighCharts</a></li>
-      <li><a href="\integrations\lmp\apis-externas\pokemon">API Externa Pokemon</a></li>
-      <li><a href="\integrations\lmp\apis-externas\paises">API Externa Paises</a></li>
-    </ul>
-  </nav>
-  <br>
   <h1 class="title">Integraciones MAS</h1>
   <nav>
     <ul>
@@ -34,7 +18,6 @@
   <nav>
     <ul>
       <li><a href="\integrations\mas\api-andalusian-campings\together">Graficos Conjuntos 1</a></li>
-      <li><a href="\integrations\lmp\together">Graficos Conjuntos 2</a></li>
     </ul>
   </nav>
 </main>
