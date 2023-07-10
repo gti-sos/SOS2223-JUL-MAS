@@ -22,7 +22,7 @@
             <li>
                 <strong>Repositorio</strong>:
                 <a href="https://github.com/gti-sos/SOS2223-JUL-MAS"
-                    >gti-sos/SOS2223-20</a
+                    >gti-sos/SOS2223-JUL-MAS</a
                 >
             </li>
             <li>
