@@ -9,7 +9,6 @@
       <li><a href="\integrations\mas\api-andalusian-campings\external-api\space">Noticias Espaciales</a></li>
       <li><a href="\integrations\mas\api-andalusian-campings\external-api\advice">Consejos</a></li>
       <li><a href="\integrations\mas\api-andalusian-campings\external-api\university">Lista de Universidades</a></li>
-      <li><a href="\integrations\mas\api-andalusian-campings\external-api\science">Literatura Científica</a></li>
       <li><a href="\integrations\mas\api-andalusian-campings\external-api\food">Recetas de Comida</a></li>
     </ul>
   </nav>
