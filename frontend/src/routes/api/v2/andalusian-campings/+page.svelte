@@ -198,7 +198,6 @@
     const camping_places = parseInt(formData.camping_places);
     // Validación básica antes de enviar el formulario
     if (
-      !formData.name ||
       formData.start_date === null ||
       id === null ||
       formData.state === null ||
