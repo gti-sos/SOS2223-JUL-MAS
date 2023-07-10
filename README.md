@@ -7,7 +7,7 @@
 
 - **Project description**: Analysing the purpouse of public andalusian property, camping and blood donation focusing in Cordoba Zones.
 - **Repository**: [gti-sos/SOS2223-20](https://github.com/gti-sos/SOS2223-20)
-- **URL**: https://sos2223-20.ew.r.appspot.com
+- **URL**: [https://sos2223-20.ew.r.appspot.com](https://sos2223-jul-mas.ew.r.appspot.com/)
 - **APIS v1:**
    - https://sos2223-20.ew.r.appspot.com/api/v1/andalusian-campings/docs (Developed by Miguel Ángel Salinas)
 
