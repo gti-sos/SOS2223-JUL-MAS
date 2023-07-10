@@ -1,171 +1,179 @@
 <script>
   //@ts-nocheck
   import { onMount } from "svelte";
-  import { createEventDispatcher } from "svelte";
 
-  const dispatcher = createEventDispatcher();
-  let universities = [];
-  let sortedColumn = "";
-  let sortDirection = 1;
-  let searchTerm = "";
+  let API = "https://sos2223-jul-mas.ew.r.appspot.com/api/v3/campings";
+  let data = [];
+  let precipitationSevilla = 0; // Variable para almacenar la media de precipitaciones de Sevilla
+
+  async function getData() {
+    const response = await fetch(API);
+    data = await response.json();
+  }
+
+  async function getPrecipitationSevilla() {
+    const url =
+      "https://api.open-meteo.com/v1/forecast?latitude=37.3828&longitude=-5.9732&hourly=temperature_2m,relativehumidity_2m,precipitation,uv_index&start_date=2023-03-07&end_date=2023-07-10";
+    const response = await fetch(url);
+    const forecastData = await response.json();
+
+    const hourlyData = forecastData.hourly;
+    const sevillaData = hourlyData.filter(
+      (item) =>
+        item.time.includes("2023-07-07") ||
+        item.time.includes("2023-07-08") ||
+        item.time.includes("2023-07-09")
+    );
+
+    let totalPrecipitation = 0;
+    for (let i = 0; i < sevillaData.length; i++) {
+      totalPrecipitation += sevillaData[i].precipitation;
+    }
+
+    precipitationSevilla = totalPrecipitation / sevillaData.length;
+  }
+
+  function getDataAlmeria() {
+    const province = "ALMERÍA";
+    let sumCampingPlaces = 0;
+    data.forEach((item) => {
+      const itemProvince = item.state;
+
+      if (itemProvince === province) {
+        sumCampingPlaces += item.camping_places;
+      }
+    });
+    return sumCampingPlaces;
+  }
+
+  function getDataCadiz() {
+    const province = "CÁDIZ";
+    let sumCampingPlaces = 0;
+    data.forEach((item) => {
+      const itemProvince = item.state;
+
+      if (itemProvince === province) {
+        sumCampingPlaces += item.camping_places;
+      }
+    });
+    return sumCampingPlaces;
+  }
+
+  function getDataCordoba() {
+    const province = "CÓRDOBA";
+    let sumCampingPlaces = 0;
+    data.forEach((item) => {
+      const itemProvince = item.state;
+
+      if (itemProvince === province) {
+        sumCampingPlaces += item.camping_places;
+      }
+    });
+    return sumCampingPlaces;
+  }
+
+  function getDataGranada() {
+    const province = "GRANADA";
+    let sumCampingPlaces = 0;
+    data.forEach((item) => {
+      const itemProvince = item.state;
+
+      if (itemProvince === province) {
+        sumCampingPlaces += item.camping_places;
+      }
+    });
+    return sumCampingPlaces;
+  }
+
+  function getDataJaen() {
+    const province = "JAÉN";
+    let sumCampingPlaces = 0;
+    data.forEach((item) => {
+      const itemProvince = item.state;
+
+      if (itemProvince === province) {
+        sumCampingPlaces += item.camping_places;
+      }
+    });
+    return sumCampingPlaces;
+  }
+
+  function getDataHuelva() {
+    const province = "HUELVA";
+    let sumCampingPlaces = 0;
+    data.forEach((item) => {
+      const itemProvince = item.state;
+
+      if (itemProvince === province) {
+        sumCampingPlaces += item.camping_places;
+      }
+    });
+    return sumCampingPlaces;
+  }
+
+  function getDataMalaga() {
+    const province = "MÁLAGA";
+    let sumCampingPlaces = 0;
+    data.forEach((item) => {
+      const itemProvince = item.state;
+
+      if (itemProvince === province) {
+        sumCampingPlaces += item.camping_places;
+      }
+    });
+    return sumCampingPlaces;
+  }
+
+  function getDataSevilla() {
+    const province = "SEVILLA";
+    let sumCampingPlaces = 0;
+    data.forEach((item) => {
+      const itemProvince = item.state;
+
+      if (itemProvince === province) {
+        sumCampingPlaces += item.camping_places;
+      }
+    });
+    return sumCampingPlaces;
+  }
 
   onMount(async () => {
-    try {
-      const proxyURL = "/api/proxy-mas/?url=";
-      const response = await fetch(proxyURL + encodeURIComponent("http://universities.hipolabs.com/search?name="));
-      const data = await response.json();
-      universities = data;
-    } catch (error) {
-      console.error("Error fetching data:", error);
+    await Promise.all([getData(), getPrecipitationSevilla()]);
+
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var columnData = google.visualization.arrayToDataTable([
+        ["Provincia", "Campings", "Precipitaciones", { role: "style" }],
+        ["Almería", getDataAlmeria(), 0, "gold"],
+        ["Cádiz", getDataCadiz(), 0, "silver"],
+        ["Córdoba", getDataCordoba(), 0, "red"],
+        ["Granada", getDataGranada(), 0, "blue"],
+        ["Jaén", getDataJaen(), 0, "yellow"],
+        ["Huelva", getDataHuelva(), 0, "green"],
+        ["Málaga", getDataMalaga(), 0, "orange"],
+        ["Sevilla", getDataSevilla(), precipitationSevilla, "purple"],
+      ]);
+
+      var columnOptions = {
+        title: "Plazas de Camping por Provincias (Column Chart)",
+        width: 1500,
+        height: 900,
+        bar: { groupWidth: "95%" },
+        legend: { position: "none" },
+      };
+
+      var columnChart = new google.visualization.ColumnChart(
+        document.getElementById("columnchart_values")
+      );
+      columnChart.draw(columnData, columnOptions);
     }
   });
-
-  function sortTable(column) {
-    if (sortedColumn === column) {
-      sortDirection *= -1;
-    } else {
-      sortDirection = 1;
-    }
-
-    sortedColumn = column;
-    universities = universities.sort((a, b) => {
-      const valA = a[column] ? a[column].toLowerCase() : "";
-      const valB = b[column] ? b[column].toLowerCase() : "";
-
-      if (valA < valB) return -1 * sortDirection;
-      if (valA > valB) return 1 * sortDirection;
-      return 0;
-    });
-  }
-
-  function searchByName() {
-    const filteredUniversities = universities.filter(
-      university =>
-        university.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    universities = filteredUniversities;
-  }
 </script>
 
-<style>
-  .table-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-  }
+<svelte:head>
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+</svelte:head>
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-  }
-
-  th,
-  td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #e0e0e0;
-  }
-
-  th {
-    background-color: #f5f5f5;
-    font-weight: bold;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .sorted:after {
-    content: "";
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 0.5rem;
-    border: solid transparent;
-    border-width: 0.35rem 0.35rem 0;
-    border-top-color: currentColor;
-    opacity: 0.8;
-    transform: rotate(180deg);
-  }
-
-  .ascending:after {
-    transform: rotate(0deg);
-  }
-
-  tr:nth-child(2n) {
-    background-color: #f9f9f9;
-  }
-
-  .search-bar {
-    margin-top: 16px;
-    display: flex;
-    align-items: center;
-  }
-
-  .search-input {
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 8px;
-    flex-grow: 1;
-  }
-
-  .search-button {
-    padding: 8px 16px;
-    font-size: 14px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-</style>
-
-<div class="table-container">
-  <div class="search-bar">
-    <input
-      type="text"
-      class="search-input"
-      bind:value={searchTerm}
-      placeholder="Search by name"
-    />
-    <button class="search-button" on:click={searchByName}>Search</button>
-  </div>
-  {#if universities.length > 0}
-    <table>
-      <thead>
-        <tr>
-          <th class:sortable={sortedColumn === "name"} on:click={() => sortTable("name")}>
-            Name
-            {#if sortedColumn === "name"}
-              <span class:sorted class:ascending={sortDirection === 1}></span>
-            {/if}
-          </th>
-          <th class:sortable={sortedColumn === "country"} on:click={() => sortTable("country")}>
-            Country
-            {#if sortedColumn === "country"}
-              <span class:sorted class:ascending={sortDirection === 1}></span>
-            {/if}
-          </th>
-          <th>Domains</th>
-          <th>Web Pages</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each universities as university, index (university.id)}
-          <tr class:colored-row={index % 2 !== 0}>
-            <td>{university.name}</td>
-            <td>{university.country}</td>
-            <td>{university.domains.join(", ")}</td>
-            <td>
-              {#each university.web_pages as webPage}
-                <a href={webPage} target="_blank" rel="noopener noreferrer">{webPage}</a><br />
-              {/each}
-            </td>
-          </tr>
-        {/each}
-      </tbody>
-    </table>
-  {:else}
-    <p>No universities found.</p>
-  {/if}
-</div>
+<div id="columnchart_values" style="width: 1500px; height: 900px;" />
