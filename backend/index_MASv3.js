@@ -7,7 +7,7 @@ import fs from 'fs';
 import request from 'request';
 import Datastore from 'nedb';
 console.log("h");var campings = new Datastore();
-  
+
 function loadBackend_MASv3(app) {
   //__________________________GET initial data
   //Redireccion a la DOC de POSTMAN
@@ -53,17 +53,12 @@ function loadBackend_MASv3(app) {
 
       // Comprobamos los errores que han podido surgir
       if (err) {
-
         console.log(`Error getting campings`);
-
         // El estado es 500: Internal Server Error
         res.sendStatus(500);
-
         // Comprobamos si existen datos:
       } else if (data.length == 0) {
-
         console.log(`campings not found`);
-
         // Si no existen datos el estado es 404: Not Found
         res.sendStatus(404);
 
@@ -71,7 +66,6 @@ function loadBackend_MASv3(app) {
         // Inicializamos los valores necesarios para el filtrado: un contador para el limit y el valor por defecto offset
         let i = -1;
         if (!req.query.offset) { var offset = -1; } else { var offset = parseInt(req.query.offset); }
-
         // Filtramos los datos, para cada campo posible se devuelve true si no se pasa en la query, 
         // y si es un parametro se comprueba la condicion
         let datos = data.filter((x) => {
@@ -82,7 +76,7 @@ function loadBackend_MASv3(app) {
             ((req.query.name == undefined) || (req.query.name === x.name)) &&
             ((req.query.responsible == undefined) || (req.query.responsible === x.responsible)) &&
             ((req.query.registry_code == undefined) || (req.query.registry_code === x.registry_code)) &&
-            ((req.query.id == undefined) || (req.query.id === x.id)) &&
+            ((req.query.id == undefined) || (parseInt(req.query.id) === x.id)) &&
             ((req.query.city == undefined) || (req.query.city === x.city)) &&
             ((req.query.camping_places == undefined) || (req.query.camping_places === x.camping_places)) &&
             ((req.query.category == undefined) || (req.query.category === x.category)) &&
@@ -94,12 +88,12 @@ function loadBackend_MASv3(app) {
           if (req.query.limit == undefined) { var cond = true; } else { var cond = (offset + parseInt(req.query.limit)) >= i; }
           return (i > offset) && cond;
         });
+        console.log(res);
 
         // Comprobamos si tras el filtrado sigue habiendo datos, si no hay:
         if (datos.length == 0) {
           console.log(`campings not found`);
-          // Estado 404: Not Found
-          res.sendStatus(404);
+          res.json([]);
           // Si por el contrario encontramos datos
         } else {
           console.log(`Data of campings returned: ${datos.length}`);

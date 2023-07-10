@@ -141,6 +141,7 @@
   extension_URL = extension_URL.substring(0, extension_URL.length - 1);
   console.log("EXTENSION:" + extension_URL);
   const res = await fetch(API + extension_URL, { method: "GET" });
+  console.log(res);
   if (res.ok) {
     const data = await res.json();
     result = JSON.stringify(data, null, 2);
