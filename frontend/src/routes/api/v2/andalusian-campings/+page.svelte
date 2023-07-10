@@ -116,7 +116,7 @@
         const status = await res.status;
         resultStatus = status.toString();
         if (campings.length === 0) {
-          campings = [];
+          resultStatus = 'empty';
         }
       } else {
         resultStatus = "Error en la solicitud";
@@ -146,9 +146,7 @@
     result = JSON.stringify(data, null, 2);
     campings = data;
   } else {
-    console.log(data);
-    campings = [];
-    showMessage("Hubo problemas con el JSON");
+    showMessage("No se encontró ningun elemento con ese valor");
   }
 }
 
