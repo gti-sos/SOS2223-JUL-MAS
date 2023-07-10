@@ -4,33 +4,27 @@
 
   let API = "https://sos2223-jul-mas.ew.r.appspot.com/api/v3/campings";
   let data = [];
-  let precipitationSevilla = 0; // Variable para almacenar la media de precipitaciones de Sevilla
+  let uvIndexSevilla = 0; // Variable para almacenar la media de precipitaciones de Sevilla
 
   async function getData() {
     const response = await fetch(API);
     data = await response.json();
   }
 
-  async function getPrecipitationSevilla() {
+  async function getUVIndexSevilla() {
     const url =
       "https://api.open-meteo.com/v1/forecast?latitude=37.3828&longitude=-5.9732&hourly=temperature_2m,relativehumidity_2m,precipitation,uv_index&start_date=2023-03-07&end_date=2023-07-10";
     const response = await fetch(url);
     const forecastData = await response.json();
 
     const hourlyData = forecastData.hourly;
-    const sevillaData = hourlyData.filter(
-      (item) =>
-        item.time.includes("2023-07-07") ||
-        item.time.includes("2023-07-08") ||
-        item.time.includes("2023-07-09")
-    );
+    let totalUVIndex = 0;
 
-    let totalPrecipitation = 0;
-    for (let i = 0; i < sevillaData.length; i++) {
-      totalPrecipitation += sevillaData[i].precipitation;
+    for (const hourData of hourlyData) {
+      totalUVIndex += hourData.uv_index;
     }
 
-    precipitationSevilla = totalPrecipitation / sevillaData.length;
+    uvIndexSevilla = totalUVIndex / hourlyData.length;
   }
 
   function getDataAlmeria() {
@@ -138,7 +132,7 @@
   }
 
   onMount(async () => {
-    await Promise.all([getData(), getPrecipitationSevilla()]);
+    await Promise.all([getData(), getUVIndexSevilla()]);
 
     google.charts.load("current", { packages: ["corechart"] });
     google.charts.setOnLoadCallback(drawChart);
@@ -153,7 +147,7 @@
         ["Jaén", getDataJaen(), 0, "yellow"],
         ["Huelva", getDataHuelva(), 0, "green"],
         ["Málaga", getDataMalaga(), 0, "orange"],
-        ["Sevilla", getDataSevilla(), precipitationSevilla, "purple"],
+        ["Sevilla", getDataSevilla(), uvIndexSevilla, "purple"],
       ]);
 
       var columnOptions = {
