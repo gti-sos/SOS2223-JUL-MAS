@@ -145,10 +145,9 @@
     const data = await res.json();
     result = JSON.stringify(data, null, 2);
     campings = data;
-    if (campings.length === 0) {
-      campings = [];
-    }
   } else {
+    console.log(data);
+    campings = [];
     showMessage("Hubo problemas con el JSON");
   }
 }
