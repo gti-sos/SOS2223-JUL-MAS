@@ -83,15 +83,14 @@
   },
   "scripts": {
     "start": "node index",
-    "test": "npm run test-inmovables & npm run test-andalusian-campings",
+    "test": "npm run test-andalusian-campings",
     "test-andalusian-campings": "npx newman run ./tests/GcloudV3_postman.json",
-    "test-inmovables": "npx newman run ./tests/immovables.postman_LMP.json"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gti-sos/sos2223-JUL-MAS.git"
   },
-  "author": "Lukmare & Salinosaso",
+  "author": "Salinosaso",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/gti-sos/sos2223-JUL-MAS/issues"
