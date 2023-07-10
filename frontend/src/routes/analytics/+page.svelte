@@ -2,7 +2,7 @@
     //@ts-nocheck
     import { onMount } from "svelte";
     import { dev } from "$app/environment";
-    let API_externaSOS = "/api/proxy-lmp/?url=https://sos2223-20.ew.r.appspot.com/api/v3/campings";
+    let API_externaSOS = "/api/proxy-lmp/?url=https://sos2223-jul-mas.ew.r.appspot.com/api/v3/campings";
     let API_immovables = "/api/v3/immovables/";
 
     if (dev){

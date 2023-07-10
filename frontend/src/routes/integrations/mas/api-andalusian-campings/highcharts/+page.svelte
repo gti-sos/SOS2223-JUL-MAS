@@ -10,7 +10,7 @@
     createChartIIII();
   });
 
-  let API = "https://sos2223-20.ew.r.appspot.com/api/v3/campings";
+  let API = "https://sos2223-jul-mas.ew.r.appspot.com/api/v3/campings";
   //let API = "http://localhost:12345/api/v3/campings";
 
   let data = [];

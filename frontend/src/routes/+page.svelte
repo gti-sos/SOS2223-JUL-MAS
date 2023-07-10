@@ -1,9 +1,9 @@
 <svelte:head>
-    <title>SOS2223-20</title>
+    <title>SOS2223-JUL-MAS</title>
 </svelte:head>
 <main>
     <body>
-        <h1>SOS2223-20</h1>
+        <h1>SOS2223-JUL-MAS</h1>
         <ul dir="auto">
             <li>
                 <strong>Equipo</strong>
@@ -27,8 +27,8 @@
             </li>
             <li>
                 <strong>URL</strong>:
-                <a href="http://sos2223-20.appspot.com/"
-                    >http://sos2223-20.appspot.com/
+                <a href="https://sos2223-jul-mas.ew.r.appspot.com/"
+                    >https://sos2223-jul-mas.ew.r.appspot.com/
                 </a>
             </li>
             <li>
@@ -36,9 +36,9 @@
                 <ul dir="auto">
                     <li>
                         <a
-                            href="http://sos2223-20.appspot.com/api/v1/andalusian-campings/docs"
+                            href="https://sos2223-jul-mas.ew.r.appspot.com/api/v1/andalusian-campings/docs"
                             rel="nofollow"
-                            >http://sos2223-20.appspot.com/api/v1/andalusian-campings/docs</a
+                            >https://sos2223-jul-mas.ew.r.appspot.com/api/v1/andalusian-campings/docs</a
                         >
                         (desarrollado por
                         <a href="https://github.com/salinosaso"
@@ -53,7 +53,7 @@
                                 <a
                                     href="https://documenter.getpostman.com/view/26063155/2s93XyU3Xd"
                                     rel="nofollow"
-                                    >http://sos2223-20.appspot.com/api/v2/andalusian-campings/docs</a
+                                    >https://sos2223-jul-mas.ew.r.appspot.com/api/v2/andalusian-campings/docs</a
                                 >
                                 (desarrollado por
                                 <a href="https://github.com/salinosaso"
@@ -113,7 +113,7 @@
                             <li>
                                 <strong>Frontend</strong>
                                 <br />
-                                <a href="/api/v2/andalusian-campings"
+                                <a href="/api/v3/andalusian-campings"
                                     >Campings Andalucia</a
                                 >
                             </li>
