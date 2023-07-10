@@ -113,7 +113,7 @@
                             <li>
                                 <strong>Frontend</strong>
                                 <br />
-                                <a href="/api/v3/andalusian-campings"
+                                <a href="/api/v2/andalusian-campings"
                                     >Campings Andalucia</a
                                 >
                             </li>
