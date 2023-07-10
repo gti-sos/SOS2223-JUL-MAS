@@ -195,7 +195,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2223-jul-mas.ew.r.appspot.com/api/v2/campings",
+					"raw": "https://sos2223-jul-mas.ew.r.appspot.com/api/v3/campings",
 					"protocol": "https",
 					"host": [
 						"sos2223-jul-mas",
@@ -206,7 +206,7 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"campings"
 					]
 				}
