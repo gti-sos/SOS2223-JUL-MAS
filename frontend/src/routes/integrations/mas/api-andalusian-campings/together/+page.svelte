@@ -4,7 +4,7 @@
 
   async function getData() {
     const campingApiUrl = 'https://sos2223-jul-mas.ew.r.appspot.com/api/v3/campings';
-    const immovablesApiUrl = '/api/proxy-mas/?url=https://sos2223-20.ew.r.appspot.com/api/v3/immovables';
+    const immovablesApiUrl = '/api/proxy-mas/?url=https://sos2223-jul-mas.ew.r.appspot.com/api/v3/immovables';
 
     const campingResponse = await fetch(campingApiUrl);
     const immovablesResponse = await fetch(immovablesApiUrl, {
