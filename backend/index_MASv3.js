@@ -1,4 +1,4 @@
-console.log("g");
+console.log("g - antes de todo el code index_mas_v3");
 const campingsFilePath = 'ddbb/camping-andalusia.json';
 const BASE_API_URL = "/api/v3";
 import { notStrictEqual } from 'assert';
@@ -6,7 +6,7 @@ import { Console } from 'console';
 import fs from 'fs';
 import request from 'request';
 import Datastore from 'nedb';
-console.log("h");var campings = new Datastore();
+console.log("h - antes del campings=datastore despues de los import");var campings = new Datastore();
 
 function loadBackend_MASv3(app) {
   //__________________________GET initial data
@@ -197,29 +197,29 @@ app.get(`${BASE_API_URL}/campings/:id`, (req, res) => {
   app.post(BASE_API_URL + '/campings/*', (req, res) => {
     res.sendStatus(405);
   });
-  console.log("i");
+  console.log("i - justo despues del post url prohibidas antes del post normal");
   //______________________________POST normal
   app.post(BASE_API_URL + '/campings', (req, res) => {
-    console.log("j");  const newCamping = req.body;
+    console.log("j - dentro de post normal antes de new camping");  const newCamping = req.body;
     if (!newCamping.name || !newCamping.responsible || !newCamping.registry_code ||
       !newCamping.camping_places || !newCamping.city || !newCamping.group_id || !newCamping.state
       || !newCamping.start_date || !newCamping.category || !newCamping.id) {
       return res.status(400).json({ error: 'Faltan datos en el JSON' });
     }
-    console.log("k");campings.findOne({ id: newCamping.id }, (err, doc) => {
-      console.log("l"); if (err) {
+    console.log("k - antes de campings.findOne");campings.findOne({ id: newCamping.id }, (err, doc) => {
+      console.log("l - justo antes del if si hay error "); if (err) {
         console.log(`Error finding camping with id ${newCamping.id}: ${err}`);
         res.sendStatus(500);
       } else if (doc) {
         res.status(409).json({ error: `Camping with id ${newCamping.id} already exists.` });
       } else {
-        console.log("m"); campings.insert(newCamping, (err, newDoc) => {
-          console.log("n");  if (err) {
+        console.log("m - post solo sucede si no hay errores o el camping no existe previamente"); campings.insert(newCamping, (err, newDoc) => {
+          console.log("n - just antes de error en el camping que no existe en post");  if (err) {
             console.log(`Error inserting camping with id ${newCamping.id}: ${err}`);
             res.sendStatus(500);
           } else {
             console.log(`Inserted new camping with id ${newCamping.id}`);
-            console.log("ñ"); res.sendStatus(201);
+            console.log("ñ - solo sucede si se inserta un camping todo ok"); res.sendStatus(201);
           }
           console.log("o");  });
           console.log("p");}
@@ -285,9 +285,9 @@ app.get(`${BASE_API_URL}/campings/:id`, (req, res) => {
     console.log('piped: ' + req.url);
     req.pipe(request(url)).pipe(res);
 });
-console.log("t");
+console.log("t - está despues del app-use, casi al final del todo todisimo");
 };
 
 
 export { loadBackend_MASv3 }
-console.log("u");
+console.log("u - está al final de todo code index_masv3, despues del export loadbackend");
