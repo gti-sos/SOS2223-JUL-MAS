@@ -1,157 +1,115 @@
 <script>
     //@ts-nocheck
-    import { onMount } from "svelte";
-    import { dev } from "$app/environment";
-    let API_externaSOS = "/api/proxy-lmp/?url=https://sos2223-jul-mas.ew.r.appspot.com/api/v3/campings";
-    let API_immovables = "/api/v3/immovables";
-
-    if (dev){
-            API_immovables = "http://localhost:12345" + API_immovables;
-            console.log(API_immovables);
-            API_externaSOS = "http://localhost:12345" + API_externaSOS;
-    }
-    let datos = "";
-    let result_1 = "";
-    let resultStatus_1 = "";
-    let result_2 = "";
-    let resultStatus_2 = "";
-    let p = "";
-    let provincias = [];
-    let uso = [];
-    let num_campings = [];
-    let categoria = [];
-    let id = [];
-    let resource = [];
-    let inventory_num = [];
-    let grupo = [];
-    let modalidad = [];
-
-    onMount(async () => {
-        getData_immovables();
-    });
-
-    async function getData_compañerx() {
-        const res = await fetch(API_externaSOS, {
-            method: "GET",
+    import { onMount } from 'svelte';
+  
+    async function getData() {
+      const campingApiUrl = 'https://sos2223-jul-mas.ew.r.appspot.com/api/v3/campings';
+      const immovablesApiUrl = '/api/proxy-mas/?url=https://sos2223-jul-lmp.ew.r.appspot.com/api/v3/immovables';
+  
+      const campingResponse = await fetch(campingApiUrl);
+      const immovablesResponse = await fetch(immovablesApiUrl, {
+              method: "GET",
+          });
+      
+      console.log(campingResponse);
+      console.log(immovablesResponse);
+      const campingData = await campingResponse.json();
+      const immovablesData = await immovablesResponse.json();
+      console.log(campingData);
+      console.log(immovablesData);
+  
+      // Process the data as needed
+  
+      // Logging the fetched data
+      console.log('Camping Data:', campingData.slice(0, 14));
+      console.log('Immovables Data:', immovablesData.slice(0, 14));
+  
+      // Example: Creating a Google chart
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(drawChart);
+  
+      function drawChart() {
+        // Create the chart data and options
+        const chartData = new google.visualization.DataTable();
+        chartData.addColumn('string', 'Provincia');
+        chartData.addColumn('number', 'Plazas de Camping');
+        chartData.addColumn('number', 'Inventario');
+  
+        // Filter the camping and immovables data based on the desired states/provinces
+        const states = ['ALMERÍA', 'CÁDIZ', 'CÓRDOBA', 'GRANADA', 'JAÉN', 'HUELVA', 'MÁLAGA', 'SEVILLA'];
+  
+        const filteredCampingData = campingData.filter(camping => states.includes(camping.state));
+        const filteredImmovablesData = immovablesData.filter(immovable =>
+          states.includes(immovable.province.toUpperCase())
+        );
+  
+        // Calculate the sum of camping places for each state
+        const campingPlacesSumByState = {};
+        filteredCampingData.forEach(camping => {
+          if (!campingPlacesSumByState[camping.state]) {
+            campingPlacesSumByState[camping.state] = 0;
+          }
+          campingPlacesSumByState[camping.state] += camping.camping_places;
         });
-        try {
-            const data = await res.json();
-            result_1 = JSON.stringify(data, null, 2);
-            datos = data;
-            for (let i = 0; i < datos.length; i++) {
-                p = `${datos[i]["state"]} ${datos[i]["start_date"] } ${datos[i]["id"]}`;
-                if (!provincias.includes(p)) {
-                    provincias.push(p);
-                }
-                num_campings.push(parseInt(datos[i]["camping_places"]));
-                categoria.push(parseInt(datos[i]["category"]));
-                grupo.push(parseInt(datos[i]["group_id"]));
-                modalidad.push(parseInt(datos[i]["modality"]));
-
-            }
-            loadJSCharting(
-                provincias,
-                id,
-                resource,
-                inventory_num,
-                categoria,
-                num_campings,
-                uso
-            );
-        } catch (error) {
-            console.log(`Error parsing result: ${error}`);
+  
+        // Calculate the stacked sum of inventory numbers for each state
+        const inventoryNumSumByState = {};
+        filteredImmovablesData.forEach(immovable => {
+          const province = immovable.province.toUpperCase();
+          const inventoryNum = immovable.inventory_num;
+          if (!inventoryNumSumByState[province]) {
+            inventoryNumSumByState[province] = 0;
+          }
+          inventoryNumSumByState[province] += inventoryNum;
+        });
+  
+        // Combine both sums into the chart data
+        states.forEach(state => {
+          const campingPlaces = campingPlacesSumByState[state] || 0;
+          const inventoryNum = inventoryNumSumByState[state.toUpperCase()] || 0;
+          chartData.addRow([state, campingPlaces, inventoryNum]);
+        });
+  
+        const chartOptions = {
+          isStacked: true,
+          height: 800,
+          width: 1600,
+          legend: { position: 'top' },
+          vAxis: { minValue: 0 },
+        };
+  
+        // Check if there is no data for campings or immovables
+        const noData =
+          filteredCampingData.length === 0 || filteredImmovablesData.length === 0;
+  
+        // Draw the chart or display the message bubble
+        if (noData) {
+          const bubbleOptions = {
+            title: 'Aun no se han cargado los datos',
+            width: 1600,
+            height: 800,
+          };
+  
+          const bubbleChart = new google.visualization.BubbleChart(
+            document.getElementById('columnchart_values')
+          );
+          bubbleChart.draw(chartData, bubbleOptions);
+        } else {
+          const columnChart = new google.visualization.ColumnChart(
+            document.getElementById('columnchart_values')
+          );
+          columnChart.draw(chartData, chartOptions);
         }
-        const status = await res.status;
-        resultStatus_1 = status;
+      }
+  
     }
-
-    async function getData_immovables() {
-        const res = await fetch(API_immovables, {
-            method: "GET",
-        });
-        try {
-            const data = await res.json();
-            console.log(data)
-            result_2 = JSON.stringify(data, null, 2);
-            datos = data;
-            for (let i = 0; i < datos.length; i++) {
-                p = `${datos[i]["province"]} ${datos[i]["modified_date"]} ${datos[i]["id"]}  ${datos[i]["current_usage"]}`;
-                provincias.push(p);
-                resource.push(datos[i]["resource"]);
-                inventory_num.push(datos[i]["inventory_num"]);
-                uso.push(datos[i]["current_usage"].length);
-            }
-            getData_compañerx();
-        } catch (error) {
-            console.log(`Error parsing result: ${error}`);
-        }
-        const status = await res.status;
-        resultStatus_2 = status;
-    }
-
-    async function loadJSCharting(provincias,id,resource,inventory_num,categoria,num_campings) {
-        var chart = JSC.chart('chartPrimera', { 
-            debug: true, 
-            defaultSeries_type: 'column', 
-            title_label_text: '', 
-            yAxis: { label_text: ''}, 
-            xAxis: {
-                label_text: '', 
-                categories: provincias
-            }, 
-            series: [   
-                { 
-                    name: 'Modalidad', 
-                    points: modalidad
-                },
-                { 
-                    name: 'Grupo', 
-                    points: grupo
-                },
-                { 
-                    name: 'Numero de Inventario', 
-                    points: inventory_num
-                },
-                { 
-                    name: 'Recurso', 
-                    points: resource
-                },
-                { 
-                    name: 'Categoria', 
-                    points: categoria
-                },
-                { 
-                    name: 'Numero de Campings', 
-                    points: num_campings
-                }, 
-            ] 
-        });
-    }
-</script>
-
-<svelte:head>
-    <script src="https://code.jscharting.com/latest/jscharting.js"></script>
-</svelte:head>
-<main>
-    <div style="margin-left: 30px;">
-        <h1 style="text-align:center; font-style: oblique;">Integración conjunta con Proxys</h1>
-        <h2 style="text-align:center; font-style: oblique;">Gráfica inmuebles y campings</h2>
-    <h2>Integración</h2>
-    <div id="chartPrimera" style="height: 500px; margin: 0px auto; margin-top:40px">
-    </div>
-        <h4>Resultado compañerx</h4>
-        {#if resultStatus_1 != ""}
-            <p>Result:{resultStatus_1}</p>
-            <pre>                
-                {result_1}
-            </pre>
-        {/if}
-        <h4>Resultados propios</h4>
-        {#if resultStatus_2 != ""}
-            <p>Result: {resultStatus_2}</p>
-            <pre>
-                {result_2}
-            </pre>
-        {/if}
-    </div>
-</main>
+  
+    onMount(getData);
+  </script>
+  
+  <svelte:head>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+  </svelte:head>
+  
+  <div id="columnchart_values"></div>
+  
