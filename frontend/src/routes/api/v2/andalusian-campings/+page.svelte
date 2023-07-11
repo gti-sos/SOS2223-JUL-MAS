@@ -674,7 +674,7 @@
   }
 
   .form-container button[type="submit"] {
-    background-color: #444444;
+    background-color: #4caf50;
     color: #f8f8f8;
     padding: 1rem 2rem;
     border: none;
@@ -682,10 +682,12 @@
     font-size: 1rem;
     cursor: pointer;
     margin-top: 1rem;
+    transition: background-color 0.3s ease;
   }
 
   .form-container button[type="submit"]:hover {
-    background-color: #666666;
+    background-color: #45a049;
+    transform: scale(1.05);
   }
 
   .button-container {
@@ -695,7 +697,7 @@
   }
 
   .button-container button {
-    background-color: #444444;
+    background-color: #2196f3;
     color: #f8f8f8;
     padding: 1rem 2rem;
     border: none;
@@ -703,10 +705,12 @@
     font-size: 1rem;
     cursor: pointer;
     margin-right: 1rem;
+    transition: background-color 0.3s ease;
   }
 
   .button-container button:hover {
-    background-color: #666666;
+    background-color: #1e87db;
+    transform: scale(1.05);
   }
 
   .message {
