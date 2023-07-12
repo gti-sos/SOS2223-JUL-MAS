@@ -47,11 +47,12 @@ function loadBackend_MASv3(app) {
   //______________________________GET con rango de busqueda
   app.get(BASE_API_URL + '/campings', (req, res) => {
     console.log(`New request to /campings`);
-
+    console.log("get 1ero, antes de nada");
     // Recuperamos todos los registros de la base de datos para filtrarlos despues
     campings.find({}, { _id: 0 }, (err, data) => {
-
+      console.log("get 2nd, a la hora de buscar los campings");
       // Comprobamos los errores que han podido surgir
+      console.log("get 3rd, antes de filtrar si error");
       if (err) {
         console.log(`Error getting campings`);
         // El estado es 500: Internal Server Error
@@ -64,11 +65,13 @@ function loadBackend_MASv3(app) {
 
       } else {
         // Inicializamos los valores necesarios para el filtrado: un contador para el limit y el valor por defecto offset
-        let i = -1;
+        console.log("get 4o, si no hay errores ni datalengt = 0");let i = -1;
         if (!req.query.offset) { var offset = -1; } else { var offset = parseInt(req.query.offset); }
         // Filtramos los datos, para cada campo posible se devuelve true si no se pasa en la query, 
         // y si es un parametro se comprueba la condicion
+        console.log("get 5o, ya dentro de ver offset");
         let datos = data.filter((x) => {
+          console.log("get 6o, dentro del filtro");
           return (((req.query.start_date == undefined) || (parseInt(req.query.start_date) === x.start_date)) &&
             ((req.query.from == undefined) || (parseInt(req.query.from) <= x.start_date)) &&
             ((req.query.to == undefined) || (parseInt(req.query.to) >= x.start_date)) &&
@@ -85,10 +88,9 @@ function loadBackend_MASv3(app) {
         }).filter((x) => {
           // Por ultimo implementamos la paginacion
           i = i + 1;
-          if (req.query.limit == undefined) { var cond = true; } else { var cond = (offset + parseInt(req.query.limit)) >= i; }
+          console.log("get 7o, filtro para paginacion");if (req.query.limit == undefined) { var cond = true; } else { var cond = (offset + parseInt(req.query.limit)) >= i; }
           return (i > offset) && cond;
         });
-        console.log(res);
 
         // Comprobamos si tras el filtrado sigue habiendo datos, si no hay:
         if (datos.length == 0) {
@@ -102,8 +104,8 @@ function loadBackend_MASv3(app) {
 
         }
       }
-    })
-  });
+      console.log("get 8o, al final del campings.find para tratar el data");})
+    console.log("get 9o, al final del get entero");});
 
   //GET /campings/state/id (First Province, then id): Recurso único
   app.get(`${BASE_API_URL}/campings/:state/:id`, (req, res) => {
@@ -200,32 +202,39 @@ app.get(`${BASE_API_URL}/campings/:id`, (req, res) => {
   console.log("i - justo despues del post url prohibidas antes del post normal");
   //______________________________POST normal
   app.post(BASE_API_URL + '/campings', (req, res) => {
-    console.log("j - dentro de post normal antes de new camping");  const newCamping = req.body;
+    console.log("j - dentro de post normal antes de new camping"); const newCamping = req.body;
     if (!newCamping.name || !newCamping.responsible || !newCamping.registry_code ||
       !newCamping.camping_places || !newCamping.city || !newCamping.group_id || !newCamping.state
       || !newCamping.start_date || !newCamping.category || !newCamping.id) {
+      console.log("zz - solo sale si hay problemas con el json");
       return res.status(400).json({ error: 'Faltan datos en el JSON' });
     }
-    console.log("k - antes de campings.findOne");campings.findOne({ id: newCamping.id }, (err, doc) => {
+    console.log("k - despues de comprobar que json ok antes de campings.findOne"); campings.findOne({ id: newCamping.id }, (err, doc) => {
       console.log("l - justo antes del if si hay error "); if (err) {
         console.log(`Error finding camping with id ${newCamping.id}: ${err}`);
         res.sendStatus(500);
       } else if (doc) {
         res.status(409).json({ error: `Camping with id ${newCamping.id} already exists.` });
       } else {
-        console.log("m - post solo sucede si no hay errores o el camping no existe previamente"); campings.insert(newCamping, (err, newDoc) => {
-          console.log("n - just antes de error en el camping que no existe en post");  if (err) {
+        console.log("m - post solo sucede si no hay errores o el camping no existe previamente"); 
+        campings.insert(newCamping, (err, newDoc) => {
+          console.log("n - just antes de error en el camping que no existe en post"); if (err) {
             console.log(`Error inserting camping with id ${newCamping.id}: ${err}`);
             res.sendStatus(500);
           } else {
             console.log(`Inserted new camping with id ${newCamping.id}`);
             console.log("ñ - solo sucede si se inserta un camping todo ok"); res.sendStatus(201);
           }
-          console.log("o");  });
-          console.log("p");}
-          console.log("q");});
-          console.log("r");});
-          console.log("s");
+          console.log("o - final de camping insert");
+        });
+        console.log("p - casi al final y ocurre si no hay campins con id ya puesta ");
+      }
+      console.log("q- lo ultimo despues del campings.findOne");
+    });
+    console.log("r- lo ultimo que sale en un post");
+  });
+
+  console.log("s - fuera del post normal");
   //______________________________PUT con URL prohibidas
   app.put(BASE_API_URL + '/campings', (req, res) => {
     res.sendStatus(405);
