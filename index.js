@@ -1,4 +1,4 @@
-console.log("a - en index.js lo primero que sale");
+console.log("A");console.log("a - en index.js lo primero que sale");
 import express from "express";
 import cors from 'cors';
 var port = process.env.PORT || 12345;
@@ -20,9 +20,9 @@ loadBackend_MASv3(app);
 loadBackend_LMPv2(app);
 loadBackend_LMPv3(app);
 console.log("d despues de loadbackend all apps");
-
+console.log("B");
 app.use(handler);
 app.listen(port,() =>{
-  console.log("e - index.js dentro del listen port antes de console.log servidor corriendo");console.log(`Servidor corriendo en el puerto: ${port}`);
+  console.log("C");console.log("e - index.js dentro del listen port antes de console.log servidor corriendo");console.log(`Servidor corriendo en el puerto: ${port}`);
 });
-console.log("f - final code index.js");
+console.log("D");console.log("f - final code index.js");
